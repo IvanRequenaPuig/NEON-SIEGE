@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NEON SIEGE</title>
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Roboto:wght@500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css"></head>
+<body>
+<div id="loader"><h1 class="logo">NEON SIEGE</h1><div id="lbar"><i id="lfill"></i></div><div id="ltxt">Cargando…</div></div>
+<canvas id="bg"></canvas><div id="crt"></div>
+<main id="menu" data-s="main">
+ <section class="screen active" data-screen="main">
+  <h1 class="logo">NEON SIEGE</h1>
+  <p class="tag">SOBREVIVE Y DISPARA</p>
+  <div class="nickrow"><input id="nick" maxlength="14" placeholder="Escribe tu nombre" autocomplete="off" spellcheck="false"><button id="eye" title="Mostrar/ocultar mi nombre en partida">👁</button></div>
+  <p class="press" id="press">[ PULSA ENTER PARA JUGAR ]</p>
+ </section>
+ <section class="screen" data-screen="settings"><h2>AJUSTES</h2>
+  <div class="tabs"><button data-tab="skins" class="on">Skins</button><button data-tab="controls">Controles</button><button data-tab="audio">Audio</button><button data-tab="video">Gráficos</button><button data-tab="game">Juego</button></div>
+  <div class="tab on" id="tab-skins"><div class="skinwrap"><canvas id="preview" width="260" height="260"></canvas><div id="skinInfo"></div></div><div id="skinGrid"></div></div>
+  <div class="tab" id="tab-controls"><div id="keyList"></div><button class="btn sm" id="resetKeys">Restaurar teclas</button></div>
+  <div class="tab" id="tab-audio">
+   <label>Música <input type="range" id="music" min="0" max="100"></label>
+   <label>Efectos <input type="range" id="sfx" min="0" max="100"></label></div>
+  <div class="tab" id="tab-video">
+   <label>Calidad <select id="quality"><option value="low">Baja</option><option value="med">Media</option><option value="high">Alta (brillos)</option></select></label>
+   <label>Partículas <input type="range" id="particles" min="0" max="100"></label>
+   <label>Sacudida de pantalla <input type="range" id="shake" min="0" max="100"></label>
+   <label>Efecto CRT <input type="checkbox" id="crtOn"></label>
+   <label>Mostrar FPS <input type="checkbox" id="fps"></label>
+   <button class="btn sm" id="full">Pantalla completa</button></div>
+  <div class="tab" id="tab-game">
+   <label>Dificultad <select id="difficulty"><option value="0.8">Fácil</option><option value="1">Normal</option><option value="1.4">Difícil</option><option value="1.9">Pesadilla</option></select></label>
+   <p style="text-align:center;line-height:1.6">Mueve con WASD, apunta con el ratón y dispara con CLICK o J.<br>Arma: Q o 1-2-3 · Esquivar: ESPACIO.<br>Cada 5 oleadas aparece un JEFE. Recoge ❤ y ⚡.</p>
+   <button class="btn sm" data-go="ranking">🏆 Ver ranking</button></div>
+  <button class="btn" data-go="main">← Volver</button></section>
+ <section class="screen" data-screen="ranking"><h2>RANKING</h2><small id="rankMode"></small><div id="board" style="width:100%"></div><button class="btn" data-go="main">← Volver</button></section>
+ <section class="screen" data-screen="online"><h2>JUGAR CON AMIGOS</h2>
+  <input id="onick" maxlength="14" placeholder="Tu nombre" autocomplete="off">
+  <div id="lobbyOff"><button class="btn" id="mkRoom">➕ Crear sala</button><div class="nickrow"><input id="joinCode" maxlength="5" placeholder="CÓDIGO" autocomplete="off"><button class="btn sm" id="joinRoom">Unirse</button></div></div>
+  <div id="lobbyOn" hidden><p>SALA <b id="roomCode"></b> · hasta 4 jugadores</p><div class="nickrow"><input id="roomLink" readonly><button class="btn sm" id="shareBtn">📤 Invitar</button></div><div id="lobbyList"></div><button class="btn big" id="startOnline">▶ EMPEZAR</button><p id="waitHost">Esperando a que el anfitrión empiece…</p><button class="btn sm" id="leaveRoom">Salir de la sala</button></div>
+  <p id="lobbyMsg"></p><button class="btn" data-go="main">← Volver</button></section>
+ <button id="invite" class="corner" title="Invitar amigos a jugar online"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/></svg></button>
+ <button id="gear" class="corner" title="Ajustes" data-go="settings">⚙</button>
+ <p class="best corner">Récord: <b id="best">0</b></p>
+</main>
+<div id="hud" hidden><div class="bar"><i id="hp"></i></div><div id="score">0</div><div id="wave">OLEADA 1</div><div id="fpsBox"></div><div id="banner"></div><div id="weapon"></div><div id="hint">🖱 Apunta · CLICK / J = disparar · Q / 1-2-3 = arma · ESPACIO = esquivar · ESC = pausa</div></div>
+<div id="over" hidden><h2 id="overT">GAME OVER</h2><p id="overS"></p><input id="pname" maxlength="12" placeholder="Tu nombre"><button class="btn" id="saveScore">💾 Guardar en el ranking</button><button class="btn big" id="again">Reintentar</button><button class="btn" id="toMenu">Menú</button></div>
+<div id="pause" hidden><h2>PAUSA</h2><button class="btn big" id="resume">Continuar</button><button class="btn" id="quit">Salir al menú</button></div>
+<canvas id="game" hidden></canvas>
+<script src="js/storage.js"></script><script src="js/api.js"></script><script src="js/audio.js"></script><script src="js/skins.js"></script><script src="js/game.js"></script><script src="js/online.js"></script><script src="js/menu.js"></script>
+</body></html>
